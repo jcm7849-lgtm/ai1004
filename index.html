@@ -2,31 +2,123 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>HTML 테스트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI1004 유튜브 큐레이션 대시보드</title>
     <style>
+        /* 대시보드 전체 스타일 디자인 */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            padding: 40px;
+            font-family: 'Pretendard', sans-serif;
+            background-color: #0f0f0f; /* 유튜브 다크모드 배경색 */
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
         }
-        h1 {
-            color: #333;
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #ff0000, #cc0000); /* 유튜브 레드 그라데이션 */
+            border-radius: 15px;
+            margin-bottom: 30px;
         }
-        button {
-            padding: 10px 16px;
-            font-size: 14px;
+
+        h1 { margin: 0; font-size: 2.5rem; }
+        p { opacity: 0.8; }
+
+        /* 카테고리 섹션 설정 */
+        .category-section {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            border-left: 5px solid #ff0000;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* 채널 카드 그리드 레이아웃 */
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        /* 개별 채널 카드 스타일 */
+        .channel-card {
+            background-color: #212121;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
             cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: block;
         }
+
+        .channel-card:hover {
+            transform: translateY(-10px); /* 마우스 올리면 위로 살짝 올라감 */
+            background-color: #383838;
+        }
+
+        .channel-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #444;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            overflow: hidden;
+        }
+
+        .channel-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+        .channel-name { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
+        .channel-desc { font-size: 0.8rem; color: #aaa; }
     </style>
 </head>
 <body>
 
-    <h1>HTML 테스트 페이지</h1>
-    <p>이것은 간단한 HTML 테스트용 페이지입니다.</p>
+<header>
+    <h1>My YouTube Curation</h1>
+    <p>AI 비즈니스 컨설턴트의 전략적 구독 리스트</p>
+</header>
 
-    <button onclick="alert('버튼이 클릭되었습니다!')">
-        클릭해보세요
-    </button>
+<section class="category-section">
+    <div class="category-title">IT & AI 비즈니스</div>
+    <div class="channel-grid">
+        <a href="https://www.youtube.com/@ai1004f" class="channel-card" target="_blank">
+            <div class="channel-icon">🤖</div>
+            <div class="channel-name">AI1004</div>
+            <div class="channel-desc">내 채널 바로가기</div>
+        </a>
+        <a href="#" class="channel-card" target="_blank">
+            <div class="channel-icon">💻</div>
+            <div class="channel-name">테크 분석가</div>
+            <div class="channel-desc">최신 기술 동향</div>
+        </a>
+    </div>
+</section>
+
+<section class="category-section">
+    <div class="category-title">라이프스타일 & 골프</div>
+    <div class="channel-grid">
+        <a href="#" class="channel-card" target="_blank">
+            <div class="channel-icon">⛳</div>
+            <div class="channel-name">골프 마스터</div>
+            <div class="channel-desc">스윙 및 자세 교정</div>
+        </a>
+        <a href="#" class="channel-card" target="_blank">
+            <div class="channel-icon">🎵</div>
+            <div class="channel-name">AI Music</div>
+            <div class="channel-desc">Suno AI 작곡</div>
+        </a>
+    </div>
+</section>
 
 </body>
 </html>
