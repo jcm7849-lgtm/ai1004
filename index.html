@@ -3,122 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI1004 유튜브 큐레이션 대시보드</title>
+    <title>AI Story - 당신의 이야기</title>
     <style>
-        /* 대시보드 전체 스타일 디자인 */
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: #0f0f0f; /* 유튜브 다크모드 배경색 */
-            color: #ffffff;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        header {
-            text-align: center;
-            padding: 40px 0;
-            background: linear-gradient(135deg, #ff0000, #cc0000); /* 유튜브 레드 그라데이션 */
-            border-radius: 15px;
-            margin-bottom: 30px;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
         }
 
-        h1 { margin: 0; font-size: 2.5rem; }
-        p { opacity: 0.8; }
-
-        /* 카테고리 섹션 설정 */
-        .category-section {
-            margin-bottom: 50px;
+        /* 네비게이션 바 */
+        nav {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .category-title {
-            font-size: 1.5rem;
-            border-left: 5px solid #ff0000;
-            padding-left: 15px;
-            margin-bottom: 20px;
-        }
-
-        /* 채널 카드 그리드 레이아웃 */
-        .channel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        /* 개별 채널 카드 스타일 */
-        .channel-card {
-            background-color: #212121;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            display: block;
-        }
-
-        .channel-card:hover {
-            transform: translateY(-10px); /* 마우스 올리면 위로 살짝 올라감 */
-            background-color: #383838;
-        }
-
-        .channel-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background-color: #444;
-            margin: 0 auto 15px;
+        nav ul {
+            list-style: none;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            overflow: hidden;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
-        .channel-icon img { width: 100%; height: 100%; object-fit: cover; }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
 
-        .channel-name { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
-        .channel-desc { font-size: 0.8rem; color: #aaa; }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* 헤더 */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        /* 메인 콘텐츠 */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        section h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        section p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        /* 카드 레이아웃 */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #667eea;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* 버튼 스타일 */
+        button, .btn {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+
+        button:hover, .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active, .btn:active {
+            transform: translateY(0);
+        }
+
+        /* 푸터 */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- 네비게이션 메뉴 -->
+    <nav>
+        <ul>
+            <li><a href="#home">홈</a></li>
+            <li><a href="#story">이야기</a></li>
+            <li><a href="#features">특징</a></li>
+            <li><a href="#contact">연락처</a></li>
+            <li><a href="#about">소개</a></li>
+        </ul>
+    </nav>
 
-<header>
-    <h1>My YouTube Curation</h1>
-    <p>AI 비즈니스 컨설턴트의 전략적 구독 리스트</p>
-</header>
+    <!-- 헤더 -->
+    <header id="home">
+        <h1>🎨 AI Story</h1>
+        <p>당신의 이야기를 AI와 함께 만들어보세요</p>
+    </header>
 
-<section class="category-section">
-    <div class="category-title">IT & AI 비즈니스</div>
-    <div class="channel-grid">
-        <a href="https://www.youtube.com/@ai1004f" class="channel-card" target="_blank">
-            <div class="channel-icon">🤖</div>
-            <div class="channel-name">AI1004</div>
-            <div class="channel-desc">내 채널 바로가기</div>
-        </a>
-        <a href="#" class="channel-card" target="_blank">
-            <div class="channel-icon">💻</div>
-            <div class="channel-name">테크 분석가</div>
-            <div class="channel-desc">최신 기술 동향</div>
-        </a>
-    </div>
-</section>
+    <!-- 메인 콘텐츠 -->
+    <main>
+        <!-- 소개 섹션 -->
+        <section id="story">
+            <h2>📖 이야기란?</h2>
+            <p>
+                AI Story는 인공지능 기술을 활용하여 당신의 상상력을 현실로 만들어주는 플랫폼입니다.
+                간단한 주제만으로도 창의적이고 흥미로운 이야기가 생성됩니다.
+            </p>
+            <button onclick="alert('이야기 만들기 시작!')">시작하기</button>
+        </section>
 
-<section class="category-section">
-    <div class="category-title">라이프스타일 & 골프</div>
-    <div class="channel-grid">
-        <a href="#" class="channel-card" target="_blank">
-            <div class="channel-icon">⛳</div>
-            <div class="channel-name">골프 마스터</div>
-            <div class="channel-desc">스윙 및 자세 교정</div>
-        </a>
-        <a href="#" class="channel-card" target="_blank">
-            <div class="channel-icon">🎵</div>
-            <div class="channel-name">AI Music</div>
-            <div class="channel-desc">Suno AI 작곡</div>
-        </a>
-    </div>
-</section>
+        <!-- 특징 섹션 -->
+        <section id="features">
+            <h2>✨ 주요 특징</h2>
+            <div class="card-container">
+                <div class="card">
+                    <h3>🤖 AI 기반</h3>
+                    <p>최신 AI 기술을 활용한 창의적인 스토리 생성</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ 빠른 생성</h3>
+                    <p>몇 초 안에 완성된 이야기를 받아보세요</p>
+                </div>
+                <div class="card">
+                    <h3>🎯 개인화</h3>
+                    <p>당신의 취향에 맞게 맞춤형 이야기 제공</p>
+                </div>
+                <div class="card">
+                    <h3>🌟 다양한 장르</h3>
+                    <p>판타지, 로맨스, 공포, 모험 등 다양한 장르 선택 가능</p>
+                </div>
+                <div class="card">
+                    <h3>💾 저장 기능</h3>
+                    <p>마음에 드는 이야기를 저장하고 공유하세요</p>
+                </div>
+                <div class="card">
+                    <h3>🔄 지속적 업데이트</h3>
+                    <p>매주 새로운 기능과 개선사항이 추가됩니다</p>
+                </div>
+            </div>
+        </section>
 
+        <!-- 문의 섹션 -->
+        <section id="contact">
+            <h2>📧 연락처</h2>
+            <p>AI Story에 대해 궁금하신 점이 있으신가요?</p>
+            <p>이메일: <strong>contact@aistory.com</strong></p>
+            <button onclick="alert('피드백 폼 열기')">피드백 보내기</button>
+        </section>
+
+        <!-- 소개 섹션 -->
+        <section id="about">
+            <h2>🏢 소개</h2>
+            <p>
+                AI Story는 2024년에 시작된 혁신적인 프로젝트입니다.
+                우리는 인공지능과 창의성의 만남으로 새로운 경험을 제공하고자 합니다.
+            </p>
+            <p>
+                저희 팀은 지속적으로 서비스를 개선하고 있으며, 
+                사용자 여러분의 의견을 매우 소중하게 생각합니다.
+            </p>
+            <button onclick="alert('더 알아보기')">프로젝트 상세보기</button>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <p>&copy; 2026 AI Story. All rights reserved.</p>
+        <p>Made with 💜 by Creative Team</p>
+    </footer>
 </body>
 </html>
